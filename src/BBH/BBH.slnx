@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="BBH.Models/BBH.Models.csproj" />
+  <Project Path="BBH.UI/BBH.UI.csproj" />
+  <Project Path="BBH/BBH.csproj" />
+</Solution>
