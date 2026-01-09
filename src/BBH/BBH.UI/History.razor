@@ -1,0 +1,32 @@
+﻿@page "/history"
+@using BrowserHistory.Models
+@using Microsoft.AspNetCore.Components.Routing
+<PageTitle>User History</PageTitle>
+<div class="my-component">
+    Number of history items @browserUserHistoryRepository.FromMemory().Length
+</div>
+
+<table class="history-table">
+    <tr class="history-tr">
+        <th class="history-th">No</th>
+        <th class="history-th">Name</th>
+        <th class="history-th">Number of visits</th>
+    </tr>
+    @foreach (var (nr, item) in browserUserHistoryRepository!.FromMemory().Index())
+    {
+        <tr class="history-tr">
+            <td class="history-td">@(nr + 1)</td>
+            <td class="history-td">
+                <NavLink class="history-nav-link" href="@item.url">
+                    <span class="history-span-text" aria-hidden="true">@item.name</span>
+                </NavLink>
+            </td>
+            <td class ="history-td">@item.nrVisits</td>
+        </tr>
+    }
+</table>
+@code {
+    [Inject]
+    IBrowserUserHistoryRepository? browserUserHistoryRepository { get; set; }
+
+}
