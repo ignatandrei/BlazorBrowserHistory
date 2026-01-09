@@ -3,7 +3,7 @@
 @using Microsoft.AspNetCore.Components.Routing
 <PageTitle>User History</PageTitle>
 <div class="my-component">
-    Number of history items @browserUserHistoryRepository.FromMemory().Length
+    Number of history items @browserUserHistoryRepository!.FromMemory().Length
 </div>
 
 <table class="history-table">

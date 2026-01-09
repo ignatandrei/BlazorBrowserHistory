@@ -8,11 +8,11 @@ public class BrowserUserHistoryData
     #region database saving stuff
 
     /// <summary>
-    /// to be used just for databse related stuff
+    /// to be used just for database related stuff
     /// </summary>
     public long Id { get; set; }
     /// <summary>
-    /// to be used just for databse related stuff
+    /// to be used just for database related stuff
     /// </summary>
     public bool IsNew
     {
@@ -31,7 +31,7 @@ public class BrowserUserHistoryData
     {
         get
         {
-            return Url + "_" + Date.ToString("yyyyMMHHmmssfff") + "_" + UserName;
+            return Url + "_" + Date.ToString("yyyyMMddHHmmssfff") + "_" + UserName;
         }
     }
 }

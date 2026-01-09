@@ -47,4 +47,8 @@
 
         await base.OnInitializedAsync();
     }
+    public void Dispose()
+   {
+            NavigationManager!.LocationChanged -= LocationChanged;
+   }
 }

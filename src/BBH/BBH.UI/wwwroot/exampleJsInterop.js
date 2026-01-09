@@ -12,6 +12,3 @@ export function documentTitle() {
     return document.title;
 };
 
-export function MyDocumentTitle(a) {
-    return "andrei";// document.title;
-};
