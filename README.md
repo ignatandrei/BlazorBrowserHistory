@@ -1,0 +1,2 @@
+# BlazorBrowserHistory
+Blazor Browser History
