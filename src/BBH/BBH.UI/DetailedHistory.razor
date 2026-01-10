@@ -1,7 +1,7 @@
 ﻿@page "/historyDebug"
 @using BrowserHistory.Models
 @using Microsoft.AspNetCore.Components.Routing
-<PageTitle>User History</PageTitle>
+<PageTitle>Debug User History</PageTitle>
 <div class="my-component">
     Number of history items @browserUserHistoryRepository!.DebugData().Length
 </div>
@@ -30,6 +30,6 @@
 </table>
 @code {
     [Inject]
-    IBrowserUserHistoryRepository? browserUserHistoryRepository { get; set; }
-
+    IBrowserUserHistoryRepository browserUserHistoryRepository { get; set; } = default!;    
+    
 }

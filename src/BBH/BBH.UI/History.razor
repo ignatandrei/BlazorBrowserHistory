@@ -3,7 +3,7 @@
 @using Microsoft.AspNetCore.Components.Routing
 <PageTitle>User History</PageTitle>
 <div class="my-component">
-    Number of history items @browserUserHistoryRepository!.FromMemory().Length
+    Number of history items @browserVisitsSaved.Count
 </div>
 
 <table class="history-table">
@@ -12,7 +12,7 @@
         <th class="history-th">Name</th>
         <th class="history-th">Number of visits</th>
     </tr>
-    @foreach (var (nr, item) in browserUserHistoryRepository!.FromMemory().Index())
+    @foreach (var (nr, item) in browserVisitsSaved.Index())
     {
         <tr class="history-tr">
             <td class="history-td">@(nr + 1)</td>
@@ -24,13 +24,26 @@
             <td class ="history-td">@item.nrVisits</td>
         </tr>
     }
+    
 </table>
 
-<NavLink class="history-nav-link" href="HistoryDebug">
+@* <NavLink class="history-nav-link" href="HistoryDebug">
     <span class="history-span-text" aria-hidden="true">HistoryDebug</span>
 </NavLink>
+ *@
 @code {
     [Inject]
-    IBrowserUserHistoryRepository? browserUserHistoryRepository { get; set; }
+    IBrowserUserHistoryRepository repo { get; set; } = default!;
 
+    List<BrowserVisits> browserVisitsSaved = [];
+    protected override async Task OnInitializedAsync()
+    {
+        var dataMemory = repo.FromMemory();
+        var dataDB = await repo.Retrieve(DateTime.UtcNow);
+        browserVisitsSaved = dataDB.ToList();
+        browserVisitsSaved.AddRange(dataMemory);
+        StateHasChanged();
+        await base.OnInitializedAsync();
+    }   
+    
 }
