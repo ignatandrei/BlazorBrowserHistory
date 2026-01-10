@@ -1,0 +1,60 @@
+/* _content/BBH.UI/DetailedHistory.razor.rz.scp.css */
+.my-component[b-kup2cf1mes] {
+    border: 2px dashed red;
+    padding: 1em;
+    margin: 1em 0;
+    background-image: url('background.png');
+}
+.history-table[b-kup2cf1mes] {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.history-td[b-kup2cf1mes], .history-th[b-kup2cf1mes] {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.history-tr:nth-child(even)[b-kup2cf1mes] {
+    background-color: #f2f2f2;
+}
+
+
+.history-th[b-kup2cf1mes] {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
+/* _content/BBH.UI/History.razor.rz.scp.css */
+.my-component[b-gzggfcjvz3] {
+    border: 2px dashed red;
+    padding: 1em;
+    margin: 1em 0;
+    background-image: url('background.png');
+}
+.history-table[b-gzggfcjvz3] {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.history-td[b-gzggfcjvz3], .history-th[b-gzggfcjvz3] {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.history-tr:nth-child(even)[b-gzggfcjvz3] {
+    background-color: #f2f2f2;
+}
+
+
+.history-th[b-gzggfcjvz3] {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
