@@ -2,6 +2,7 @@ Write-Host "modify index.html"
 $indexFilePath = "Release/UIBlazor/wwwroot/index.html"
 $Content = Get-Content -Path $indexFilePath -Raw
 $updatedContent = $Content -replace '"./_framework/', '"/BlazorBrowserHistory/_framework/'
+$updatedContent = $Content -replace '<base href="/" />', '<base href="/BlazorBrowserHistory/" />'
 Set-Content -Path $indexFilePath -Value $updatedContent
 #TODO: delete br and gz files
 Remove-Item -Path "Release/UIBlazor/wwwroot/index.html.br"
