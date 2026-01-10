@@ -37,6 +37,8 @@ jobs:
         run: |
           mkdir docs
           cp -r src/BBH/Release/UIBlazor/wwwroot/* docs/
+          cd docs
+          touch .nojekyll
 
       - name: Commit and push docs
         run: |
