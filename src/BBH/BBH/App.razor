@@ -4,3 +4,8 @@
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
     </Found>
 </Router>
+@inject IConfiguration Config
+
+<HeadContent>
+    <base href="@(Config.GetValue<string>("AppBasePath"))" />
+</HeadContent>
