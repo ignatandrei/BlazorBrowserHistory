@@ -31,7 +31,7 @@ jobs:
           rm -rf docs || true
           cd src/BBH
           dotnet tool restore
-          dotnet r publishRunDocs
+          dotnet r publishDocs
 
       - name: Copy published files to docs
         run: |
