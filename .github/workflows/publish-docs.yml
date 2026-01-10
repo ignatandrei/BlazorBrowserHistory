@@ -29,7 +29,14 @@ jobs:
       - name: Publish Blazor app
         run: |
           rm -rf docs || true
-          dotnet publish src/BBH/BBH/BBH.csproj -c Release -o docs
+          cd src/BBH
+          dotnet tool restore
+          dotnet r publishDocs
+
+      - name: Copy published files to docs
+        run: |
+          mkdir docs
+          cp -r src/BBH/Release/UIBlazor/wwwroot/* docs/
 
       - name: Commit and push docs
         run: |

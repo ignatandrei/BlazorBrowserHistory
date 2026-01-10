@@ -20,7 +20,8 @@
     NavigationManager? NavigationManager { get; set; }
     [Inject]
     BrowserHistory.Models.IBrowserUserHistoryRepository? browserUserHistoryRepository { get; set; }
-
+    [Inject]
+    IConfiguration? Config{ get; set; }
     void LocationChanged(object? sender, LocationChangedEventArgs e)
     {
         var title = BBH.UI.MyInterop.GetTitle();
@@ -42,7 +43,8 @@
     }
     protected override async Task OnInitializedAsync()
     {
-        await System.Runtime.InteropServices.JavaScript.JSHost.ImportAsync("InteropData", "/_content/BBH.UI/exampleJsInterop.js");
+        var basePath = Config?.GetValue<string>("AppBasePath") ?? "";
+        await System.Runtime.InteropServices.JavaScript.JSHost.ImportAsync("InteropData", $"{basePath}_content/BBH.UI/exampleJsInterop.js");
         NavigationManager!.LocationChanged += LocationChanged; 
 
         await base.OnInitializedAsync();
