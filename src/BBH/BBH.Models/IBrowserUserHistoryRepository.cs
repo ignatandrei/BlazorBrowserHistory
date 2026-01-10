@@ -7,6 +7,7 @@ public interface IBrowserUserHistoryRepository
 {
     int MaxMemoryDataBeforeSave { get; set; }
     void AddToMemory(BrowserUserHistoryData historyData);
+    BrowserUserHistoryData[] DebugData();
     BrowserVisits[] FromMemory();
     void SaveMemory();
     IEnumerable<BrowserVisits> Retrieve(DateTime date);

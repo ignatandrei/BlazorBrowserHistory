@@ -37,7 +37,8 @@
             Url = e.Location,
             UserName = "",
             Date = DateTime.UtcNow,
-            PageName = title
+            PageName = title,
+            AdditionalInfo = $"Intercepted {e.IsNavigationIntercepted} HistoryEntryState: {e.HistoryEntryState}"
         });
 
     }

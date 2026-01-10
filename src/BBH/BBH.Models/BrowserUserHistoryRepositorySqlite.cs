@@ -16,7 +16,7 @@ public class BrowserUserHistoryRepositorySqlite : IBrowserUserHistoryRepository
     public int MaxMemoryDataBeforeSave { 
         get ; 
         set {
-            if (value <= 0) value = 100;
+            if (value <= 0) value = 10;
             field = value;
         } 
     }
@@ -65,5 +65,13 @@ public class BrowserUserHistoryRepositorySqlite : IBrowserUserHistoryRepository
     public IEnumerable<BrowserVisits> Retrieve(DateTime date)
     {
         throw new NotImplementedException();
+    }
+
+    public BrowserUserHistoryData[] DebugData()
+    {
+        lock(_memoryLock)
+        {
+            return memory.ToArray();
+        }
     }
 }
