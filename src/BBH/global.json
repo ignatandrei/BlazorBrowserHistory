@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "build": "dotnet build --configuration Release",
+    "test": "dotnet test --configuration Release",
+    "ci": "dotnet r build && dotnet r test",
+    "publishBlazorWasm": "dotnet publish BBH/BBH.csproj -c Release -o ./Release/UIBlazor",
+    "versionBlazor": "dotnet pwsh ./modifyBlazor.ps1",
+    "cleanRelease":"dotnet rimraf Release",
+    "publishRunDocs":"dotnet r cleanRelease && dotnet r publishBlazorWasm  && dotnet r versionBlazor && cd Release/UIBlazor/wwwroot  &&  dotnet serve --path-base BlazorBrowserHistory  -o ",
+    "publishRun":"dotnet r cleanRelease && dotnet r publishBlazorWasm &&  cd Release/UIBlazor/wwwroot  &&  dotnet serve -o "
+        
+  }
+}

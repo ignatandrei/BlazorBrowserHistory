@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "run-script": {
+      "version": "0.6.0",
+      "commands": [
+        "r"
+      ],
+      "rollForward": true
+    },
+    "powershell": {
+      "version": "7.5.4",
+      "commands": [
+        "pwsh"
+      ],
+      "rollForward": true
+    },
+    "dotnet-serve": {
+      "version": "1.10.194",
+      "commands": [
+        "dotnet-serve"
+      ],
+      "rollForward": true
+    },
+    "rimraf": {
+      "version": "0.3.1",
+      "commands": [
+        "rimraf"
+      ],
+      "rollForward": true
+    }
+  }
+}

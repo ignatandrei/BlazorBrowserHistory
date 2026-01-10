@@ -42,7 +42,7 @@
     }
     protected override async Task OnInitializedAsync()
     {
-        await System.Runtime.InteropServices.JavaScript.JSHost.ImportAsync("InteropData", "/_content/BBH.UI/exampleJsInterop.js");
+        await System.Runtime.InteropServices.JavaScript.JSHost.ImportAsync("InteropData", "../_content/BBH.UI/exampleJsInterop.js");
         NavigationManager!.LocationChanged += LocationChanged; 
 
         await base.OnInitializedAsync();
