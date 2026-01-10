@@ -2,14 +2,20 @@
 
 /// <summary>
 /// maybe later split in CQRS form ...
-/// </summary>
-public interface IBrowserUserHistoryRepository
+/// </summary> 
+public interface IBrowserUserHistoryRepository : IBrowserUserHistoryRepositoryDatabase
 {
     int MaxMemoryDataBeforeSave { get; set; }
-    void AddToMemory(BrowserUserHistoryData historyData);
+    Task AddToMemory(BrowserUserHistoryData historyData);
     BrowserUserHistoryData[] DebugData();
     BrowserVisits[] FromMemory();
-    void SaveMemory();
-    IEnumerable<BrowserVisits> Retrieve(DateTime date);
+    Task SaveMemory();
+}
+
+public interface IBrowserUserHistoryRepositoryDatabase
+{
+    Task Save(params BrowserUserHistoryData[] historyData);
     IEnumerable<BrowserVisits> MostUsed();
+    Task<BrowserVisits[]> Retrieve(DateTime date);
+
 }

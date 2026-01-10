@@ -1,6 +1,3 @@
-using Microsoft.JSInterop;
-using System.Runtime.InteropServices.JavaScript;
-
 namespace BBH.UI;
 
 public partial class MyInterop 

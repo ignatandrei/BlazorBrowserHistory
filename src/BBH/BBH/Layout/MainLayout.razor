@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@inherits LayoutComponentBase
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -18,11 +19,12 @@
 @code{
     [Inject]
     NavigationManager? NavigationManager { get; set; }
+    string user = "";
     [Inject]
     BrowserHistory.Models.IBrowserUserHistoryRepository? browserUserHistoryRepository { get; set; }
     [Inject]
     IConfiguration? Config{ get; set; }
-    void LocationChanged(object? sender, LocationChangedEventArgs e)
+    void LocationChanged(object? sender, LocationChangedEventArgs e, string user)
     {
         var title = BBH.UI.MyInterop.GetTitle();
 
@@ -35,23 +37,56 @@
         browserUserHistoryRepository.AddToMemory(new BrowserHistory.Models.BrowserUserHistoryData
         {
             Url = e.Location,
-            UserName = "",
+            UserName = user,
             Date = DateTime.UtcNow,
             PageName = title,
             AdditionalInfo = $"Intercepted {e.IsNavigationIntercepted} HistoryEntryState: {e.HistoryEntryState}"
         });
 
     }
+
+    EventHandler<LocationChangedEventArgs>? _locationChangedHandler;
+    #region Current User - commented
+    //do this if you read before
+    //https://learn.microsoft.com/en-us/aspnet/core/blazor/security/authentication-state?view=aspnetcore-10.0&pivots=server
+    // [Inject]
+    // AuthenticationStateProvider? authenticationStateProvider { get; set; }
+
+    protected async Task<string> GetCurrentUser()
+    {
+        return "";
+        // var data = "Loading authentication state...";
+        // if (authenticationStateProvider is null)
+        // {
+        //     data = "AuthenticationStateProvider is null.";
+        //     return data;
+        // }
+        // var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
+        // var user = authState.User;
+        // if (user.Identity is not null && user.Identity.IsAuthenticated)
+        // {
+        //     data = $"User is authenticated: {user.Identity.Name}";
+        // }
+        // else
+        // {
+        //     data = "User is not authenticated.";
+        // }
+        // return data;
+    }
+    #endregion
     protected override async Task OnInitializedAsync()
     {
         var basePath = Config?.GetValue<string>("AppBasePath") ?? "";
         await System.Runtime.InteropServices.JavaScript.JSHost.ImportAsync("InteropData", $"{basePath}_content/BBH.UI/exampleJsInterop.js");
-        NavigationManager!.LocationChanged += LocationChanged; 
+        user = await GetCurrentUser();
+        _locationChangedHandler = (s, e) => LocationChanged(s, e, user);
+        NavigationManager!.LocationChanged += _locationChangedHandler; 
 
         await base.OnInitializedAsync();
     }
     public void Dispose()
    {
-            NavigationManager!.LocationChanged -= LocationChanged;
+        if (_locationChangedHandler != null)
+            NavigationManager!.LocationChanged -= _locationChangedHandler;
    }
-}
+} 
