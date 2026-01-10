@@ -1,34 +1,33 @@
-﻿@page "/history"
+﻿@page "/historyDebug"
 @using BrowserHistory.Models
 @using Microsoft.AspNetCore.Components.Routing
 <PageTitle>User History</PageTitle>
 <div class="my-component">
-    Number of history items @browserUserHistoryRepository!.FromMemory().Length
+    Number of history items @browserUserHistoryRepository!.DebugData().Length
 </div>
 
 <table class="history-table">
     <tr class="history-tr">
         <th class="history-th">No</th>
         <th class="history-th">Name</th>
-        <th class="history-th">Number of visits</th>
+        <th class="history-th">AdditionalInfo</th>
+        <th class="history-th">Date</th>
+
     </tr>
-    @foreach (var (nr, item) in browserUserHistoryRepository!.FromMemory().Index())
+    @foreach (var (nr, item) in browserUserHistoryRepository!.DebugData().Index())
     {
         <tr class="history-tr">
             <td class="history-td">@(nr + 1)</td>
             <td class="history-td">
-                <NavLink class="history-nav-link" href="@item.url">
-                    <span class="history-span-text" aria-hidden="true">@item.name</span>
+                <NavLink class="history-nav-link" href="@item.Url">
+                    <span class="history-span-text" aria-hidden="true">@item.PageName</span>
                 </NavLink>
             </td>
-            <td class ="history-td">@item.nrVisits</td>
+            <td class ="history-td">@item.AdditionalInfo</td>
+            <td class="history-td">@item.Date.ToString("s")</td>
         </tr>
     }
 </table>
-
-<NavLink class="history-nav-link" href="HistoryDebug">
-    <span class="history-span-text" aria-hidden="true">HistoryDebug</span>
-</NavLink>
 @code {
     [Inject]
     IBrowserUserHistoryRepository? browserUserHistoryRepository { get; set; }

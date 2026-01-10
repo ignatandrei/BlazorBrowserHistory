@@ -26,7 +26,7 @@ public class BrowserUserHistoryData
     public DateTime Date { get; set; }
     public string UserName { get; set; }=string.Empty;
     public string PageName { get; set; } = string.Empty;
-
+    public string? AdditionalInfo { get; set; } 
     public string UniqueKey
     {
         get
