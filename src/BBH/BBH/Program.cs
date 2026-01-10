@@ -25,7 +25,7 @@ var app = builder.Build();
 
 await app.Services.InitializeSqliteWasmDatabaseAsync<BBHContextSqlite>();
 
-var scope = app.Services.CreateAsyncScope();
+await using var scope = app.Services.CreateAsyncScope();
 var cntFact = scope.ServiceProvider.GetRequiredService<IDbContextFactory<BBHContextSqlite>>();
 using (var db = await cntFact.CreateDbContextAsync())
 {

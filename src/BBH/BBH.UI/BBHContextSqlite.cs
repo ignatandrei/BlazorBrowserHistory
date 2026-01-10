@@ -1,7 +1,4 @@
-﻿
-using System.Globalization;
-
-namespace BBH.UI;
+﻿namespace BBH.UI;
 
 public class BBHContextSqlite : DbContext
 {

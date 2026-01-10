@@ -44,6 +44,8 @@
         });
 
     }
+
+    EventHandler<LocationChangedEventArgs>? _locationChangedHandler;
     #region Current User - commented
     //do this if you read before
     //https://learn.microsoft.com/en-us/aspnet/core/blazor/security/authentication-state?view=aspnetcore-10.0&pivots=server
@@ -77,12 +79,14 @@
         var basePath = Config?.GetValue<string>("AppBasePath") ?? "";
         await System.Runtime.InteropServices.JavaScript.JSHost.ImportAsync("InteropData", $"{basePath}_content/BBH.UI/exampleJsInterop.js");
         user = await GetCurrentUser();
-        NavigationManager!.LocationChanged +=(s,e)=> LocationChanged(s,e, user); 
+        _locationChangedHandler = (s, e) => LocationChanged(s, e, user);
+        NavigationManager!.LocationChanged += _locationChangedHandler; 
 
         await base.OnInitializedAsync();
     }
     public void Dispose()
    {
-        NavigationManager!.LocationChanged -= (s, e) => LocationChanged(s, e, user); ;
+        if (_locationChangedHandler != null)
+            NavigationManager!.LocationChanged -= _locationChangedHandler;
    }
 } 

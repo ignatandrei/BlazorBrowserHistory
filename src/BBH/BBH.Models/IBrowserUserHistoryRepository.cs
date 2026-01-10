@@ -1,6 +1,4 @@
-﻿using static BrowserHistory.Models.IBrowserUserHistoryRepository;
-
-namespace BrowserHistory.Models;
+﻿namespace BrowserHistory.Models;
 
 /// <summary>
 /// maybe later split in CQRS form ...

@@ -74,9 +74,9 @@ public class BrowserUserHistoryRepository : IBrowserUserHistoryRepository
     {
         using var cnt = await contextFactory.CreateDbContextAsync();
         var dt = date.Date;
-        var dtNext = dt.AddDays(1).AddMilliseconds(1);
+        var dtNext = dt.AddDays(1).AddMinutes(1);
         var allVisits = await cnt.BrowserUserHistoryData
-            .Where(it => it.Date >= date.Date && it.Date<dtNext)
+            .Where(it => it.Date >= dt && it.Date<dtNext)
             .Select(it => new BrowserVisits(it.Url, it.PageName, 0))
             .ToArrayAsync();
         
