@@ -9,12 +9,15 @@ using SqliteWasmBlazor;
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
 builder.Services.AddSingleton<IBrowserUserHistoryRepository, BrowserUserHistoryRepository>();
+builder.Services.AddSingleton<IBrowserUserHistoryRepositoryDatabase, SqliteDatabase>();
 builder.Services.AddDbContextFactory<BBHContextSqlite>(options =>
 {
     var connection = new SqliteWasmConnection("Data Source=History.db");
     options.UseSqliteWasm(connection);
 });
+
 builder.Services.AddSingleton<IDBInitializationService, DBInitializationService>();
+
 
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
