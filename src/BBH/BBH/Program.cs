@@ -121,6 +121,7 @@ partial class Program
     {
         using var http = new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) };
         var response = await http.GetAsync("appsettings.json");
+        response.EnsureSuccessStatusCode();
         var json = await response.Content.ReadAsStringAsync();
         var config = new ConfigurationBuilder()
             .AddJsonStream(new MemoryStream(System.Text.Encoding.UTF8.GetBytes(json)))
