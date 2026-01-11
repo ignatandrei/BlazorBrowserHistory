@@ -1,10 +1,10 @@
-﻿namespace BBH.SqliteWasmBlazor;
+﻿namespace BBH.BitBesql;
 
-public class SqliteDatabase_SqliteWasmBlazor : IBrowserUserHistoryRepositoryDatabase
+public class SqliteDatabase_BitBesql : IBrowserUserHistoryRepositoryDatabase
 {
-    private readonly IDbContextFactory<BBHContextSqlite_SqliteWasmBlazor> contextFactory;
+    private readonly IDbContextFactory<BBHContextSqlite_BitBesql> contextFactory;
 
-    public SqliteDatabase_SqliteWasmBlazor(IDbContextFactory<BBHContextSqlite_SqliteWasmBlazor> context)
+    public SqliteDatabase_BitBesql(IDbContextFactory<BBHContextSqlite_BitBesql> context)
     {
         this.contextFactory = context;
     }

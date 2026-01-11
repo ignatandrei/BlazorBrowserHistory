@@ -1,10 +1,9 @@
-﻿
-namespace BBH.SqliteWasmBlazor;
+﻿namespace BBH.BitBesql;
 
-public class BBHContextSqlite_SqliteWasmBlazor : DbContext
+public class BBHContextSqlite_BitBesql : DbContext
 {
     public DbSet<BrowserUserHistoryData> BrowserUserHistoryData { get; set; }
-    public BBHContextSqlite_SqliteWasmBlazor(DbContextOptions<BBHContextSqlite_SqliteWasmBlazor> options) : base(options) { }
+    public BBHContextSqlite_BitBesql(DbContextOptions<BBHContextSqlite_BitBesql> options) : base(options) { }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<BrowserUserHistoryData>(entity =>

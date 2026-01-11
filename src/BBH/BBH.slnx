@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="BBH.BitBesql/BBH.BitBesql.csproj" Id="13d41f4d-a452-41a0-bfe9-2c65af35a16b" />
   <Project Path="BBH.Models/BBH.Models.csproj" />
   <Project Path="BBH.SqliteWasmBlazor/BBH.SqliteWasmBlazor.csproj" Id="c9283372-31f1-45e0-91f3-bd6c781de579" />
   <Project Path="BBH.UI/BBH.UI.csproj" />
