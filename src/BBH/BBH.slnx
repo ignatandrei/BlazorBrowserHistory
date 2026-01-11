@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="BBH.Models/BBH.Models.csproj" />
+  <Project Path="BBH.SqliteWasmBlazor/BBH.SqliteWasmBlazor.csproj" Id="c9283372-31f1-45e0-91f3-bd6c781de579" />
   <Project Path="BBH.UI/BBH.UI.csproj" />
   <Project Path="BBH/BBH.csproj" />
 </Solution>

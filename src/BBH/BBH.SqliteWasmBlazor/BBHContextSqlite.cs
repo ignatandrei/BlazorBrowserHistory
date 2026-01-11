@@ -1,4 +1,5 @@
-﻿namespace BBH.UI;
+﻿
+namespace BBH.SqliteWasmBlazor;
 
 public class BBHContextSqlite : DbContext
 {

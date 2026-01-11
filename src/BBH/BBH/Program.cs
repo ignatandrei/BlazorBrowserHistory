@@ -1,4 +1,5 @@
 using BBH;
+using BBH.SqliteWasmBlazor;
 using BBH.UI;
 using BrowserHistory.Models;
 using Microsoft.AspNetCore.Components.Web;
