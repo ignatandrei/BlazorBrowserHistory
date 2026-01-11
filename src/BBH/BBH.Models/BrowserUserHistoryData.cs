@@ -1,10 +1,21 @@
 ﻿namespace BrowserHistory.Models;
-public record BrowserVisits(string url,string name,int nrVisits);
+public record BrowserVisits(string url,string name,int nrVisits)
+{
+    public static BrowserVisits[] Consolidate(BrowserVisits[] allVisits)
+    {
+        if (allVisits.Length == 0) return [];
+        return allVisits.GroupBy(it => it)
+            .Select(g => new BrowserVisits(g.Key.url, g.Key.name, g.Count()))
+            .OrderByDescending(it => it.nrVisits)
+            .ThenBy(it => it.name)
+            .ToArray();
+    }
+}
 public class BrowserUserHistoryData
 {
+    
 
-    
-    
+
     #region database saving stuff
 
     /// <summary>

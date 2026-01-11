@@ -1,12 +1,13 @@
-﻿namespace BBH.UI;
+﻿using Microsoft.EntityFrameworkCore.Internal;
 
+namespace BBH.UI;
 public class BrowserUserHistoryRepository : IBrowserUserHistoryRepository
 {
     const int DefaultMaxMemoryDataBeforeSave = 1;
-    public BrowserUserHistoryRepository(IDbContextFactory<BBHContextSqlite> context)
+    public BrowserUserHistoryRepository(IBrowserUserHistoryRepositoryDatabase databaseOps)
     {
         this.MaxMemoryDataBeforeSave= DefaultMaxMemoryDataBeforeSave;
-        this.contextFactory = context;
+        this.databaseOps = databaseOps;
     }
     private List<BrowserUserHistoryData> memory = [];
 
@@ -18,7 +19,7 @@ public class BrowserUserHistoryRepository : IBrowserUserHistoryRepository
         } 
     }
     private readonly static Lock _memoryLock = new Lock();
-    private readonly IDbContextFactory<BBHContextSqlite> contextFactory;
+    private readonly IBrowserUserHistoryRepositoryDatabase  databaseOps;
 
     public async Task AddToMemory(BrowserUserHistoryData historyData)
     {
@@ -50,19 +51,11 @@ public class BrowserUserHistoryRepository : IBrowserUserHistoryRepository
         {
             var allVisits = memory
             .Select(it => new BrowserVisits(it.Url, it.PageName, 0)).ToArray();
-            return Consolidate(allVisits);
+            return BrowserVisits.Consolidate(allVisits);
         }
     }
     
-    private BrowserVisits[] Consolidate(BrowserVisits[] allVisits)
-    {
-        if(allVisits.Length == 0)    return [];
-        return allVisits.GroupBy(it => it)
-            .Select(g => new BrowserVisits(g.Key.url, g.Key.name, g.Count()))
-            .OrderByDescending(it => it.nrVisits)
-            .ThenBy(it => it.name)
-            .ToArray();
-    }
+    
 
     public IEnumerable<BrowserVisits> MostUsed()
     {
@@ -72,15 +65,8 @@ public class BrowserUserHistoryRepository : IBrowserUserHistoryRepository
 
     public async Task<BrowserVisits[]> Retrieve(DateTime date)
     {
-        using var cnt = await contextFactory.CreateDbContextAsync();
-        var dt = date.Date;
-        var dtNext = dt.AddDays(1).AddMinutes(1);
-        var allVisits = await cnt.BrowserUserHistoryData
-            .Where(it => it.Date >= dt && it.Date<dtNext)
-            .Select(it => new BrowserVisits(it.Url, it.PageName, 0))
-            .ToArrayAsync();
         
-        return Consolidate(allVisits);
+        return await this.databaseOps.Retrieve(date);
     }
 
     public BrowserUserHistoryData[] DebugData()
@@ -93,9 +79,6 @@ public class BrowserUserHistoryRepository : IBrowserUserHistoryRepository
 
     public async Task Save(params BrowserUserHistoryData[] historyData)
     {
-        if(historyData.Length == 0)  return;
-        using var cnt = await contextFactory.CreateDbContextAsync();
-        cnt.BrowserUserHistoryData.AddRange(historyData);
-        await cnt.SaveChangesAsync();
+        await this.databaseOps.Save(historyData);
     }
 }
