@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BBH.SqliteWasmBlazor\BBH.SqliteWasmBlazor.csproj" />
     <ProjectReference Include="..\BBH.UI\BBH.UI.csproj" />
   </ItemGroup>
 

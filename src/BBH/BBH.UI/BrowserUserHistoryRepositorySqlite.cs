@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Internal;
-
-namespace BBH.UI;
+﻿namespace BBH.UI;
 public class BrowserUserHistoryRepository : IBrowserUserHistoryRepository
 {
     const int DefaultMaxMemoryDataBeforeSave = 1;
