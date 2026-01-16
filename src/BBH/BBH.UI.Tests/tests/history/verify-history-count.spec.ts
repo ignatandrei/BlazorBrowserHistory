@@ -9,6 +9,7 @@ test.describe('History Feature - Basic Functionality', () => {
   test('Verify History Item Count Header', async ({ page }) => {
      
     page= page as Page;
+    
     await page.goto(BASE);
 
     await sleep(5);
@@ -23,7 +24,7 @@ test.describe('History Feature - Basic Functionality', () => {
     await (await flash(page.getByRole('link', { name: 'History' }))).click();
 
     // Observe the 'Number of history items' counter at the top of the page
-    await expect(page.getByText('Number of history items')).toBeVisible();
+    await expect(page.getByText('Number of history items')).toBeVisibleFlash();
     await expect(page.getByRole('table')).toBeVisibleFlash();
     
 

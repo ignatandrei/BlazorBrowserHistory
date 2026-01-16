@@ -140,6 +140,7 @@ export async function flash(button:Locator ): Promise<Locator> {
 }
 
 export const expect = baseExpect.extend({
+  
   async toBeVisibleFlash(locator: Locator, options?: { timeout?: number,visible?: boolean  }) {
     const assertionName = 'toHaveAmount';
     let pass: boolean;
