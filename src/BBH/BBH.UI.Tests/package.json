@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "testAll": "npx playwright test",
-    "dev":"echo %BLAZORBROWSERHISTORY_HTTP%",    
+    "devWindows":"echo %BLAZORBROWSERHISTORY_HTTP%",
+    "dev":"node -e \"console.log(process.env.BLAZORBROWSERHISTORY_HTTP || '')\"",    
     "video":"npx playwright test verify-history-count.spec.ts --headed  --project chromium"
   },
   "keywords": [],
