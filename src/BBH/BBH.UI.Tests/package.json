@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "testAll": "npx playwright test",
+    "dev":"echo %BLAZORBROWSERHISTORY_HTTP%",    
+    "video":"npx playwright test verify-history-count.spec.ts --headed  --project chromium"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

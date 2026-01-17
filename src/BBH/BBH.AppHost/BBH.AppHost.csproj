@@ -1,4 +1,4 @@
-<Project Sdk="Aspire.AppHost.Sdk/13.1.0">
+﻿<Project Sdk="Aspire.AppHost.Sdk/13.1.0">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -9,7 +9,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BBH\BBH.csproj" />
+    <PackageReference Include="Aspire.Hosting.JavaScript" Version="13.1.0" />
   </ItemGroup>
 
+  
+  
+  <ItemGroup>
+    <PackageReference Include="JavaScriptExtensionsAspire" Version="131.2026.117.2000" />
+  </ItemGroup>
+  
+	
+
+  <ItemGroup>
+    <ProjectReference Include="..\BBH\BBH.csproj" />
+  </ItemGroup>
+    <ItemGroup>
+	    <Watch Include="../BBH.UI.Tests/package.json" />
+    </ItemGroup>
 </Project>

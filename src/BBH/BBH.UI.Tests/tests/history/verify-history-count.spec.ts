@@ -6,6 +6,9 @@ import { expect,test,LOGIN, BASE, sleep, flash, sleepMessage, setupFirstPage, en
 import {   Page } from '@playwright/test';
 
 test.describe('History Feature - Basic Functionality', () => {
+  test.afterEach( async ({ page }, testInfo) => {
+    await endTest(page as Page, testInfo);
+  });
   test('Verify History Item Count Header', async ({ page }) => {
      
     page= page as Page;

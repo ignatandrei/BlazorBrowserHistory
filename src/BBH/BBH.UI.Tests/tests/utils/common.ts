@@ -73,8 +73,8 @@ export async function endTest(page: Page, testInfo: TestInfo): Promise<void> {
     } 
 }
 
-export const BASE = process.env.ASPIRE_BASE_URL ??"http://localhost:5023/";
-export const LOGIN = process.env.ASPIRE_LOGIN_URL??"http://localhost:5023/"; 
+export const BASE = process.env.BLAZORBROWSERHISTORY_HTTP ??"http://localhost:5023/";
+export const LOGIN = process.env.BLAZORBROWSERHISTORY_HTTP??"http://localhost:5023/"; 
 export const RESOURCE_URL = `${BASE}`;
 
 export async function setupFirstPage(page: Page, test:TestInfo): Promise<void> {
