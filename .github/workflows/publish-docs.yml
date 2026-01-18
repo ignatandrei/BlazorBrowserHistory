@@ -10,8 +10,8 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
       id-token: write
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
