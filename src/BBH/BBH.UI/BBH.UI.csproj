@@ -36,6 +36,7 @@
 		<Description>A Blazor WebAssembly library for SQLite integration in browser history applications</Description>
 		<Authors>ignatandrei</Authors>
 		<License>MIT</License>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<LicenseExpression>MIT</LicenseExpression>
 		<RepositoryUrl>https://github.com/ignatandrei/BlazorBrowserHistory</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
