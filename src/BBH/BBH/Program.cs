@@ -27,36 +27,19 @@ switch(dbProviderStr)
 switch(dbProvider)
 {
     case DatabaseProvider.SqliteWasmBlazor:
-        builder.Services.AddDbContextFactory<BBHContextSqlite_SqliteWasmBlazor>(options =>
-        {
-            var connection = new SqliteWasmConnection("Data Source=HistorySqliteWasmBlazor.db");
-            options.UseSqliteWasm(connection);
-        });
-        builder.Services.AddSingleton<IBrowserUserHistoryRepositoryDatabase, SqliteDatabase_SqliteWasmBlazor>();
-
+        builder.Services.SqliteWasmBlazor_AddDependencies("HistorySqliteWasmBlazor.db");
 
         break;
     case DatabaseProvider.BitBesql:
 
-        builder.Services.AddBesqlDbContextFactory<BBHContextSqlite_BitBesql>(optionsAction: options =>
-        {
-            options.UseSqlite("Data Source=HistoryBitBesql.db");
-        }
-        );
-        builder.Services.AddSingleton<IBrowserUserHistoryRepositoryDatabase, SqliteDatabase_BitBesql>();
-
+        builder.Services.BitBesql_AddDependencies("HistoryBitBesql.db");
         break;
     default:
         throw new Exception($"Unsupported DatabaseProvider {dbProvider}");
 }
 
-
 builder.Services.AddSingleton<IBrowserUserHistoryRepository, BrowserUserHistoryRepository>();
 
-if (dbProvider == DatabaseProvider.SqliteWasmBlazor)
-{
-    builder.Services.AddSingleton<IDBInitializationService, DBInitializationService>();
-}
 
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
@@ -65,43 +48,13 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 var app = builder.Build();
 
-if (dbProvider == DatabaseProvider.SqliteWasmBlazor)
-{
-    await app.Services.InitializeSqliteWasmDatabaseAsync<BBHContextSqlite_SqliteWasmBlazor>();
-}
-await using var scope = app.Services.CreateAsyncScope();
 switch (dbProvider)
 {
     case DatabaseProvider.BitBesql:
-        var cntFact_BitBesql = scope.ServiceProvider.GetRequiredService<IDbContextFactory<BBHContextSqlite_BitBesql>>();
-        using (var db = await cntFact_BitBesql.CreateDbContextAsync())
-        {
-            try
-            {
-                //await db.Database.EnsureDeletedAsync();
-                await db.Database.EnsureCreatedAsync();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"DB Creation Error, probably exists {ex.Message}");
-            }
-        }
+        await app.Services.BitBesql_CreateDatabase();
         break;
     case DatabaseProvider.SqliteWasmBlazor:
-
-        var cntFact_SqliteWasmBlazor = scope.ServiceProvider.GetRequiredService<IDbContextFactory<BBHContextSqlite_SqliteWasmBlazor>>();
-        using (var db = await cntFact_SqliteWasmBlazor.CreateDbContextAsync())
-        {
-            try
-            {
-                //await db.Database.EnsureDeletedAsync();
-                await db.Database.EnsureCreatedAsync();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"DB Creation Error, probably exists {ex.Message}");
-            }
-        }
+        await app.Services.SqliteWasmBlazor_CreateDatabase();
         break;
 }
 
