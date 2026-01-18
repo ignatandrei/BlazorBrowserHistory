@@ -42,9 +42,7 @@ jobs:
 
       - name: Push package
         run: |
-          dotnet nuget push src/nu/* \
-            --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" \
-            --source https://www.nuget.org/api/v2/package
+          dotnet nuget push src/nu/* --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://www.nuget.org/api/v2/package
 
           
       - name: Publish Blazor app
