@@ -1,5 +1,6 @@
 name: Build and deploy to docs
-
+permissions:
+  id-token: write   # required for GitHub OIDC
 on:
   push:
     tags:
