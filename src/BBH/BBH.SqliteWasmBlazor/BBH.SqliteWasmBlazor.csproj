@@ -11,4 +11,8 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\BBH.Models\BBH.Models.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\..\README.md" Link="README.md" />
+	</ItemGroup>
+
 </Project>
