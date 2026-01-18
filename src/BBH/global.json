@@ -9,7 +9,7 @@
     "wasmData": "dotnet pwsh ./modifyPostData.ps1",    
     "publishDocs":"dotnet r cleanRelease && dotnet r versionBlazor && dotnet r publishBlazorWasm && dotnet r wasmData",
     "publishRunDocs":"dotnet r publishDocs  && cd Release/UIBlazor/wwwroot &&  dotnet serve --path-base BlazorBrowserHistory  -o ",
-    "publishRun":"dotnet r cleanRelease && dotnet r publishBlazorWasm &&  cd Release/UIBlazor/wwwroot  &&  dotnet serve -o "
-        
+    "publishRun":"dotnet r cleanRelease && dotnet r publishBlazorWasm &&  cd Release/UIBlazor/wwwroot  &&  dotnet serve -o ",
+    "pack": "dotnet pack -c Release -o ../nu"
   }
 }

@@ -35,6 +35,7 @@ jobs:
           cd src/BBH
           dotnet tool restore
           dotnet r publishDocs
+          dotnet r pack
 
       - name: Copy published files to docs
         run: |
