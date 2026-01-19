@@ -9,7 +9,9 @@ See https://ignatandrei.github.io/BlazorBrowserHistory/
 
 1. BBH.Models
 
-2. One of the following
+2. BBH.UI
+
+3. One of the following
     BBH.SqliteWasmBlazor ( use SqliteWasmBlazor for storing in WASM )
     BBH.BitBesql ( use BeSqBit.Besql for storing in WASM  )
 
