@@ -15,7 +15,8 @@ public interface IBrowserUserHistoryRepository : IBrowserUserHistoryRepositoryDa
 public interface IBrowserUserHistoryRepositoryDatabase
 {
     Task Save(params BrowserUserHistoryData[] historyData);
-    IEnumerable<BrowserVisits> MostUsed();
+   
     Task<BrowserVisits[]> Retrieve(DateTime date);
 
+    Task<DateOnly[]> RetrieveLastDates(int nrDates);
 }
