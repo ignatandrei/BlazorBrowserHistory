@@ -4,8 +4,11 @@ public record BrowserVisits(string url,string name,int nrVisits)
     public static BrowserVisits[] Consolidate(BrowserVisits[] allVisits)
     {
         if (allVisits.Length == 0) return [];
-        return allVisits.GroupBy(it => it)
-            .Select(g => new BrowserVisits(g.Key.url, g.Key.name, g.Count()))
+        return allVisits
+            .Where(it => !string.IsNullOrWhiteSpace(it.url))
+            .Where(it => !string.IsNullOrWhiteSpace(it.name))
+            .GroupBy(it => new { it.url, it.name })
+            .Select(g => new BrowserVisits(g.Key.url.Trim(), g.Key.name, g.Count()))
             .OrderByDescending(it => it.nrVisits)
             .ThenBy(it => it.name)
             .ToArray();

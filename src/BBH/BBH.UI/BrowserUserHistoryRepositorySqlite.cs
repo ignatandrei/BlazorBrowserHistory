@@ -31,10 +31,14 @@ public class BrowserUserHistoryRepository : IBrowserUserHistoryRepository
             }
         }
     }
+    public async Task<DateOnly[]> RetrieveLastDates(int nrDates)
+    {
+        return await this.databaseOps.RetrieveLastDates(nrDates);
+    }
 
-    
-    
-    
+
+
+
     public async Task SaveMemory()
     {
         //lock (_memoryLock)
@@ -55,10 +59,7 @@ public class BrowserUserHistoryRepository : IBrowserUserHistoryRepository
     
     
 
-    public IEnumerable<BrowserVisits> MostUsed()
-    {
-        throw new NotImplementedException();
-    }
+    
 
 
     public async Task<BrowserVisits[]> Retrieve(DateTime date)

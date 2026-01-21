@@ -9,10 +9,7 @@ public class SqliteDatabase_BitBesql : IBrowserUserHistoryRepositoryDatabase
         this.contextFactory = context;
     }
 
-    public IEnumerable<BrowserVisits> MostUsed()
-    {
-        throw new NotImplementedException();
-    }
+   
 
     public async Task<BrowserVisits[]> Retrieve(DateTime date)
     {
@@ -25,6 +22,26 @@ public class SqliteDatabase_BitBesql : IBrowserUserHistoryRepositoryDatabase
             .ToArrayAsync();
 
         return BrowserVisits.Consolidate(allVisits);
+    }
+
+    public async Task<DateOnly[]> RetrieveLastDates(int nrDates)
+    {
+        using var cnt = await contextFactory.CreateDbContextAsync();
+        var distinctDates =  cnt.BrowserUserHistoryData
+            .AsAsyncEnumerable()
+            .Select(it => new { it.Date.Year, it.Date.Month, it.Date.Day })
+            .Select(it => new DateOnly(it.Year, it.Month, it.Day))
+            .Distinct()
+            .OrderByDescending(it => it)
+            .Take(nrDates)
+            
+            ;
+        var lst= new List<DateOnly>();
+        await foreach (var date in distinctDates)
+        {
+            lst.Add(date);
+        }
+        return lst.ToArray();
     }
 
     public async Task Save(params BrowserUserHistoryData[] historyData)
