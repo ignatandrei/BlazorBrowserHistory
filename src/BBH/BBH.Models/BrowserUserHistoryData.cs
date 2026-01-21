@@ -7,8 +7,12 @@ public record BrowserVisits(string url,string name,int nrVisits)
         return allVisits
             .Where(it => !string.IsNullOrWhiteSpace(it.url))
             .Where(it => !string.IsNullOrWhiteSpace(it.name))
-            .GroupBy(it => new { it.url, it.name })
-            .Select(g => new BrowserVisits(g.Key.url.Trim(), g.Key.name, g.Count()))
+            .GroupBy(it => new { url= it.url.Trim(), name= it.name.Trim() })
+            .Select(g => new BrowserVisits(
+                g.Key.url, 
+                g.Key.name,
+                g.Sum(v => (v.nrVisits == 0) ? 1 : v.nrVisits)
+            ))
             .OrderByDescending(it => it.nrVisits)
             .ThenBy(it => it.name)
             .ToArray();
