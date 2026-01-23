@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.JavaScript" Version="13.1.0" />
+    <PackageReference Include="BlazorExtensionsAspire" Version="131.2026.123.2107" />
   </ItemGroup>
 
   
