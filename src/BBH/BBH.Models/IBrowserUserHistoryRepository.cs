@@ -19,4 +19,6 @@ public interface IBrowserUserHistoryRepositoryDatabase
     Task<BrowserVisits[]> Retrieve(DateTime date);
 
     Task<DateOnly[]> RetrieveLastDates(int nrDates);
+
+    string NameProvider(); 
 }
