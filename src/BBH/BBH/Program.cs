@@ -69,21 +69,50 @@ public enum DatabaseProvider
 partial class Program
 {
     public static DatabaseProvider dbProvider = DatabaseProvider.None;
+    private static async Task< Dictionary<string, string?>> FromSettings(Uri url, string nameSetting)
+    {
+        string nameFile="";
+        try
+        {
+            if (!string.IsNullOrEmpty(nameSetting))
+            {
+                nameSetting = "." + nameSetting + ".";
+            }
+            else
+            {
+                nameSetting = ".";
+            }
+            nameFile = $"appsettings{nameSetting}json";
+            using var http = new HttpClient { BaseAddress = url };
+            var response = await http.GetAsync(nameFile);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync();
+            var config = new ConfigurationBuilder()
+                .AddJsonStream(new MemoryStream(System.Text.Encoding.UTF8.GetBytes(json)))
+                .Build();
+            var dict = new Dictionary<string, string?> { };
 
+            foreach (var kvp in config.AsEnumerable())
+            {
+                dict[kvp.Key] = kvp.Value;
+            }
+            return dict;
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine($"loading {nameFile} send exception {ex.Message}");
+            return [];
+        }
+    }
     public static async Task LoadConfigurationAsync(WebAssemblyHostBuilder builder)
     {
-        using var http = new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) };
-        var response = await http.GetAsync("appsettings.json");
-        response.EnsureSuccessStatusCode();
-        var json = await response.Content.ReadAsStringAsync();
-        var config = new ConfigurationBuilder()
-            .AddJsonStream(new MemoryStream(System.Text.Encoding.UTF8.GetBytes(json)))
-            .Build();
-        var dict = new Dictionary<string, string?> { };
-
-        foreach (var kvp in config.AsEnumerable())
+        var BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+        var dict = await FromSettings(BaseAddress,"");
+        var env = builder.HostEnvironment.Environment;
+        var res = await FromSettings(BaseAddress, env);
+        foreach(var kvp in res)
         {
-            dict[kvp.Key] = kvp.Value;
+            dict[kvp.Key]= kvp.Value;
         }
         builder.Configuration.AddInMemoryCollection(dict.ToArray());
 
