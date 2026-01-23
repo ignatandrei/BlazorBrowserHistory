@@ -9,7 +9,7 @@ public class SqliteDatabase_BitBesql : IBrowserUserHistoryRepositoryDatabase
         this.contextFactory = context;
     }
 
-   
+    public string NameProvider() => "BitBesql";
 
     public async Task<BrowserVisits[]> Retrieve(DateTime date)
     {

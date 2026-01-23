@@ -80,4 +80,7 @@ public class BrowserUserHistoryRepository : IBrowserUserHistoryRepository
     {
         await this.databaseOps.Save(historyData);
     }
+
+    public string NameProvider()=>databaseOps.NameProvider();
+
 }

@@ -4,6 +4,8 @@ public class SqliteDatabase_SqliteWasmBlazor : IBrowserUserHistoryRepositoryData
 {
     private readonly IDbContextFactory<BBHContextSqlite_SqliteWasmBlazor> contextFactory;
 
+    public string NameProvider() => "SqliteWasmBlazor";
+
     public SqliteDatabase_SqliteWasmBlazor(IDbContextFactory<BBHContextSqlite_SqliteWasmBlazor> context)
     {
         this.contextFactory = context;
