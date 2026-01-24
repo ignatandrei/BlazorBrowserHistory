@@ -42,12 +42,12 @@ jobs:
         with:
           user: ignatandrei
 
-      - name: Upload NuGet artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: nuget-packages
-          path: src/nu/*
-          retention-days: 1
+      # - name: Upload NuGet artifacts
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: nuget-packages
+      #     path: src/nu/*
+      #     retention-days: 1
           
       - name: Push package
         run: |
