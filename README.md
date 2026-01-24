@@ -7,14 +7,14 @@ See https://ignatandrei.github.io/BlazorBrowserHistory/
 
 ## Install the following package
 
-1. BBH.Models
+1. BBH.Models [![NuGet](https://img.shields.io/nuget/v/BBH.Models.svg)](https://www.nuget.org/packages/BBH.Models/)
 
-2. BBH.UI
+2. BBH.UI [![NuGet](https://img.shields.io/nuget/v/BBH.UI.svg)](https://www.nuget.org/packages/BBH.UI/)
 
 3. One of the following
-    BBH.SqliteWasmBlazor ( use SqliteWasmBlazor for storing in WASM )
-    BBH.BitBesql ( use BeSqBit.Besql for storing in WASM  )
-
+    BBH.SqliteWasmBlazor ( use SqliteWasmBlazor for storing in WASM ) [![NuGet](https://img.shields.io/nuget/v/BBH.SqliteWasmBlazor.svg)](https://www.nuget.org/packages/BBH.SqliteWasmBlazor/)
+    BBH.BitBesql ( use BeSqBit.Besql for storing in WASM  ) [![NuGet](https://img.shields.io/nuget/v/BBH.BitBesql.svg)](https://www.nuget.org/packages/BBH.BitBesql/)
+ 
 ## Add to the Blazor WASM project
 
 ### For BBH.SqliteWasmBlazor
